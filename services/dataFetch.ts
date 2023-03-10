@@ -94,7 +94,9 @@ export async function searchBlogPosts(
     }
   );
 
-  let res = await fetch(`${api}/blogs?populate=*&${query}`);
+  let searchString = `${api}/blogs?populate=*&${query}`
+  console.log(searchString)
+  let res = await fetch(searchString);
   let blogs = await res.json();
 
   return {
