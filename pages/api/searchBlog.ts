@@ -12,12 +12,10 @@ export default async function searchBlog(
   const t = locale === "es" ? es : en;
 
   if (req.method === "POST") {
-    let {
-      q,
-      locale,
-      pag,
-    }: { q: string; locale: string; pag: number } = req.body;
+    let { q, locale, pag }: { q: string; locale: string; pag: number } =
+      req.body;
     let data = await searchBlogPosts(q, locale, pag);
+
     try {
       res.status(200).json(data);
     } catch (err) {

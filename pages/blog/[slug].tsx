@@ -1,4 +1,5 @@
 import { getBlogDetail } from "@/services/dataFetch";
+import DefaultErrorPage from "next/error";
 import {
   GetServerSideProps,
   InferGetServerSidePropsType,
@@ -18,6 +19,10 @@ import Categories from "@/components/Categories";
 const Post: NextPage = ({
   post,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  if (!post) {
+    return <DefaultErrorPage statusCode={404} />;
+  }
+
   const router = useRouter();
 
   if (router.isFallback) {

@@ -1,5 +1,6 @@
 import { getProjectsDetail, getProjectsPaths } from "@/services/dataFetch";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
+import DefaultErrorPage from "next/error";
 import Head from "next/head";
 import Image from "next/image";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
@@ -13,6 +14,9 @@ import Title from "@/components/atoms/Title";
 const Proyect = ({
   proyect,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  if (!proyect) {
+    return <DefaultErrorPage statusCode={404} />;
+  }
   return (
     <>
       <Head>

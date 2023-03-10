@@ -1,4 +1,5 @@
 import { getExperienceDetail, getExperiencePaths } from "@/services/dataFetch";
+import DefaultErrorPage from "next/error";
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import { motion } from "framer-motion";
@@ -11,6 +12,9 @@ import en from "@/locales/en";
 const Experience: NextPage = ({
   experience,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  if (!experience) {
+    return <DefaultErrorPage statusCode={404} />;
+  }
   const router = useRouter();
   const { locale } = router;
   const t = locale === "es" ? es : en;

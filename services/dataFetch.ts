@@ -12,14 +12,13 @@ import {
 } from "@/@types/schema";
 import { getImageUrl } from "@/hooks/getImageUrl";
 import useFormatDate from "@/hooks/useFormatDate";
+import { api } from "../config/index";
 var qs = require("qs");
 
 //Blog
 export async function getBlogPosts(locale = "es"): Promise<Blog[]> {
   let res = await fetch(
-    `${process.env.MY_API}/blogs?populate=*${
-      locale != "es" ? "&locale=en" : ""
-    }`
+    `${api}/blogs?populate=*${locale != "es" ? "&locale=en" : ""}`
   );
   let blogs = await res.json();
 
@@ -28,18 +27,18 @@ export async function getBlogPosts(locale = "es"): Promise<Blog[]> {
     let categories = post.attributes.categories?.data.map(
       (category: { id: number; attributes: { name: string; hex: string } }) => {
         return {
-          id: category.id,
-          name: category.attributes.name,
-          color: category.attributes.hex,
+          id: category.id || "",
+          name: category.attributes.name || "",
+          color: category.attributes.hex || "",
         };
       }
     );
     return {
       id: post.id,
       image: getImageUrl(post.attributes.image.data?.attributes.url),
-      externalImg: post.attributes.externalImg,
-      slug: post.attributes.slug,
-      title: post.attributes.title,
+      externalImg: post.attributes.externalImg || "",
+      slug: post.attributes.slug || "",
+      title: post.attributes.title || "",
       description: post.attributes.description || "",
       date: dateFormated || "",
       categories: categories || "",
@@ -95,31 +94,32 @@ export async function searchBlogPosts(
     }
   );
 
-  let res = await fetch(`${process.env.MY_API}/blogs?populate=*&${query}`);
+  let res = await fetch(`${api}/blogs?populate=*&${query}`);
   let blogs = await res.json();
 
   return {
     meta: blogs.meta,
     blogs: blogs.data.map((post: any): Blog => {
       let dateFormated = useFormatDate(post.attributes.publishedAt, locale);
-      let categories = post.attributes.categories?.data.map(
-        (category: {
-          id: number;
-          attributes: { name: string; hex: string };
-        }) => {
-          return {
-            id: category.id,
-            name: category.attributes.name,
-            color: category.attributes.hex,
-          };
-        }
-      );
+      let categories =
+        post.attributes.categories?.data.map(
+          (category: {
+            id: number;
+            attributes: { name: string; hex: string };
+          }) => {
+            return {
+              id: category.id || "",
+              name: category.attributes.name || "",
+              color: category.attributes.hex || "",
+            };
+          }
+        ) || "";
       return {
         id: post.id,
         image: getImageUrl(post.attributes.image?.data?.attributes.url),
-        externalImg: post.attributes.externalImg,
-        slug: post.attributes.slug,
-        title: post.attributes.title,
+        externalImg: post.attributes.externalImg || "",
+        slug: post.attributes.slug || "",
+        title: post.attributes.title || "",
         description: post.attributes.description || "",
         date: dateFormated || "",
         categories: categories || "",
@@ -134,7 +134,7 @@ export async function getBlogDetail(
   locale: string
 ): Promise<BlogDetail> {
   let res = await fetch(
-    `${process.env.MY_API}/blogs?populate=*${
+    `${api}/blogs?populate=*${
       locale != "es" ? "&locale=en" : ""
     }&filters[slug][$eq]=${slug}`
   );
@@ -143,19 +143,19 @@ export async function getBlogDetail(
   let categories = post.data[0].attributes.categories?.data.map(
     (category: { id: number; attributes: { name: string; hex: string } }) => {
       return {
-        id: category.id,
-        name: category.attributes.name,
-        color: category.attributes.hex,
+        id: category.id || "",
+        name: category.attributes.name || "",
+        color: category.attributes.hex || "",
       };
     }
   );
   return {
     id: post.data[0].id,
     image: getImageUrl(post.data[0].attributes.image.data?.attributes.url),
-    externalImg: post.data[0].attributes.externalImg,
-    slug: post.data[0].attributes.slug,
-    title: post.data[0].attributes.title,
-    description: post.data[0].attributes.description,
+    externalImg: post.data[0].attributes.externalImg || "",
+    slug: post.data[0].attributes.slug || "",
+    title: post.data[0].attributes.title || "",
+    description: post.data[0].attributes.description || "",
     date: dateFormated || "",
     categories: categories || "",
     content: post.data[0].attributes.content,
@@ -166,9 +166,7 @@ export async function getBlogDetail(
 //Projects
 export async function getProjects(locale = "es"): Promise<Project[]> {
   let res = await fetch(
-    `${process.env.MY_API}/proyects?populate=*${
-      locale != "es" ? "&locale=en" : ""
-    }`
+    `${api}/proyects?populate=*${locale != "es" ? "&locale=en" : ""}`
   );
   let projects = await res.json();
 
@@ -198,9 +196,7 @@ export async function getProjects(locale = "es"): Promise<Project[]> {
 
 export async function getProjectsPaths(locale = "es"): Promise<ProjectPath[]> {
   let res = await fetch(
-    `${process.env.MY_API}/proyects?populate=*${
-      locale != "es" ? "&locale=en" : ""
-    }`
+    `${api}/proyects?populate=*${locale != "es" ? "&locale=en" : ""}`
   );
   let projects = await res.json();
   return projects.data.map((proyect: any): ProjectPath => {
@@ -219,7 +215,7 @@ export async function getProjectsDetail(
   locale: string
 ): Promise<ProjectDetail> {
   let res = await fetch(
-    `${process.env.MY_API}/proyects?populate=*${
+    `${api}/proyects?populate=*${
       locale != "es" ? "&locale=en" : ""
     }&filters[slug][$eq]=${slug}`
   );
@@ -254,7 +250,7 @@ export async function getProjectsDetail(
 //Experience
 export async function getExperience(locale = "es"): Promise<Experience[]> {
   let res = await fetch(
-    `${process.env.MY_API}/experiences?populate=*&filters[show][$ne]=false${
+    `${api}/experiences?populate=*&filters[show][$ne]=false${
       locale != "es" ? "&locale=en" : ""
     }`
   );
@@ -292,9 +288,7 @@ export async function getExperiencePaths(
   locale = "es"
 ): Promise<ExperiencePath[]> {
   let res = await fetch(
-    `${process.env.MY_API}/experiences?populate=*${
-      locale != "es" ? "&locale=en" : ""
-    }`
+    `${api}/experiences?populate=*${locale != "es" ? "&locale=en" : ""}`
   );
   let experiences = await res.json();
   return experiences.data.map((experience: any): ExperiencePath => {
@@ -313,7 +307,7 @@ export async function getExperienceDetail(
   locale: string
 ): Promise<ExperienceDetail> {
   let res = await fetch(
-    `${process.env.MY_API}/experiences?populate=*${
+    `${api}/experiences?populate=*${
       locale != "es" ? "&locale=en" : ""
     }&filters[slug][$eq]=${slug}`
   );
@@ -339,18 +333,19 @@ export async function getExperienceDetail(
 
 //About
 export async function getAbout(): Promise<About> {
-  let res = await fetch(`${process.env.MY_API}/about?populate=*`);
+  let res = await fetch(`${api}/about?populate=*`);
   let about = await res.json();
 
   return {
-    esContent: about.data.attributes.content,
-    enContent: about.data.attributes.localizations.data[0]?.attributes.content,
-    image: about.data.attributes.photo.data.attributes.url,
+    esContent: about.data.attributes.content || "",
+    enContent:
+      about.data.attributes.localizations.data[0]?.attributes.content || "",
+    image: about.data.attributes.photo.data?.attributes.url || "",
   };
 }
 
 export async function getCategories(): Promise<Category> {
-  let res = await fetch(`${process.env.MY_API}/categories?populate=*`);
+  let res = await fetch(`${api}/categories?populate=*`);
   let categories = await res.json();
   return categories.data.map((category: any): Category => {
     const projects = category.attributes.proyects?.data.filter(

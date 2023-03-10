@@ -1,4 +1,5 @@
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
+import DefaultErrorPage from "next/error";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import es from "@/locales/es";
@@ -10,6 +11,9 @@ import CategoriesChart from "@/components/CategoriesChart";
 const Proyectos: NextPage = ({
   data,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  if (!data) {
+    return <DefaultErrorPage statusCode={404} />;
+  }
   const router = useRouter();
   const { locale } = router;
   const t = locale === "es" ? es : en;
