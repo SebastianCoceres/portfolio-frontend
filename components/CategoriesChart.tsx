@@ -1,6 +1,7 @@
+import en from "@/locales/en";
+import es from "@/locales/es";
 import {
   Chart as ChartJS,
-  ChartType,
   CategoryScale,
   LinearScale,
   BarElement,
@@ -8,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useRouter } from "next/router";
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
@@ -39,7 +41,7 @@ const options = {
       },
     },
     title: {
-      display: true,
+      display: false,
       position: "top" as const,
       text: "Cantidades de proyectos/blogs por categoría",
       color: "#fff",
@@ -72,6 +74,9 @@ const options = {
 };
 
 function CategoriesChart({ data }: any) {
+  const router = useRouter();
+  const { locale } = router;
+  const t = locale === "es" ? es : en;
   const labels: any = [];
   let projectsData: any = [];
   let blogsData: any = [];
