@@ -70,7 +70,7 @@ const Blogs: NextPage = ({
         <meta name="og:title" content={title} />
         <meta name="og:description" content={description} />
       </Head>
-      <section className="container mx-auto py-24 text-white">
+      <section className="container mx-auto py-24 px-4 text-white">
         <motion.div
           layoutId="blogImg"
           initial={{ opacity: 0 }}
