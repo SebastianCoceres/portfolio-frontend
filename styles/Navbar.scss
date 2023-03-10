@@ -1,0 +1,5 @@
+.navbar-open a {
+  opacity: 1;
+  transition: opacity 0.8s ease, transform 0.8s ease, width 0.8s ease,
+    border-color 0.8s ease;
+}

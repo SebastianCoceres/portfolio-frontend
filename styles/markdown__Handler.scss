@@ -1,0 +1,124 @@
+.Markdown__Handler {
+  color: white;
+
+  $breakpoints: (
+    "sm": 0,
+    "md": 640,
+    "lg": 1024,
+    "xl": 1200,
+    "xxl": 1440,
+  );
+
+  $headings: (
+    "sm": (
+      "h1": 24,
+      "h2": 20,
+      "h3": 18,
+      "h4": 16,
+      "h5": 14,
+      "h6": 12,
+    ),
+    "md": (
+      "h1": 28,
+      "h2": 24,
+      "h3": 20,
+      "h4": 18,
+      "h5": 16,
+      "h6": 14,
+    ),
+  );
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    letter-spacing: 0;
+    font-weight: bold;
+    color: $indigo400;
+  }
+
+  // loop through "$breakpoints"
+  @for $i from 1 through length($breakpoints) {
+    // loop through breakpoints inside "$headings" ["sm", "md" ...]
+    @for $j from 1 through length($headings) {
+      // "@if" headings and breakpoint matches... [sm == sm, md == md ...]
+      @if nth(nth($headings, $j), 1) == nth(nth($breakpoints, $i), 1) {
+        // create "@media querie"
+        @media (min-width: #{nth(nth($breakpoints, $i), 2)}px) {
+          // loop through headings inside "$headings" ["h1", "h2" ...]
+          @for $k from 1 through length(nth(nth($headings, $j), 2)) {
+            // generate CSS class
+            #{nth(nth(nth(nth($headings, $j), 2), $k), 1)} {
+              font-size: #{nth(nth(nth(nth($headings, $j), 2), $k), 2)}px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  img {
+    width: 80%;
+    margin: 2em auto;
+  }
+
+  ul,
+  ol {
+    padding-left: 2em;
+    margin: 1em 0;
+  }
+  ul {
+    list-style-type: disc;
+  }
+  ol {
+    list-style-type: decimal-leading-zero;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  blockquote {
+    padding: 1em;
+    border: 1px solid $neutral700;
+    border-left: 5px solid $indigo700;
+    margin: 1em 0;
+    background: $neutral800;
+  }
+
+  a {
+    color: $indigo400;
+
+    &:hover,
+    &:focus {
+      color: $indigo300;
+    }
+  }
+
+  pre {
+    border-radius: 0.5em;
+    border: 1px solid $neutral700;
+    overflow: hidden;
+
+    & div{
+      margin: 0 !important;
+    }
+
+    & + p>u {
+      display: block;
+      text-decoration: none;
+      text-align: right;
+      padding-left: 1em;
+      color: #919191;
+      font-size: smaller;
+
+      &:before {
+        content: "- ";
+      }
+    }
+  }
+}
