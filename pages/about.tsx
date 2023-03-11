@@ -61,7 +61,7 @@ const About: NextPage = ({
           }}
           className="text-white container m-auto max-w-4xl Markdown__Handler"
         >
-          <ReactMarkdown>{data}</ReactMarkdown>
+          <ReactMarkdown linkTarget="_blank">{data}</ReactMarkdown>
         </motion.div>
       </section>
     </>

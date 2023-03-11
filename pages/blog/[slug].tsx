@@ -72,7 +72,7 @@ const Post: NextPage = ({
             </div>
 
             <div className="Markdown__Handler">
-              <ReactMarkdown rehypePlugins={[rehypeRaw]} components={CodeBlock}>
+              <ReactMarkdown rehypePlugins={[rehypeRaw]} components={CodeBlock} linkTarget="_blank">
                 {post.content}
               </ReactMarkdown>
             </div>

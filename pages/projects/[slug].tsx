@@ -56,7 +56,7 @@ const Proyect = ({
           <div className="w-full md:w-2/3 px-4">
             <Title>{proyect.title}</Title>
             <div className="Markdown__Handler">
-              <ReactMarkdown rehypePlugins={[rehypeRaw]} components={CodeBlock}>
+              <ReactMarkdown rehypePlugins={[rehypeRaw]} components={CodeBlock} linkTarget="_blank">
                 {proyect.content}
               </ReactMarkdown>
             </div>
