@@ -38,7 +38,7 @@ const Proyect = ({
         >
           <div className="w-full md:w-1/3 px-4 relative md:order-1">
             <div className="md:sticky md:top-8">
-              <figure className="relative  mb-8 aspect-[2/1] grayscale opacity-30 hover:opacity-100 hover:grayscale-0 transition-all duration-700 hover:cursor-pointer">
+              <figure className="relative  mb-8 aspect-[2/1] grayscale opacity-30 hover:opacity-100 hover:grayscale-0 transition-all duration-700 hover:cursor-pointer hover:border hover:border-neutral-400/80">
                 <Image
                   fill
                   src={proyect.imageDetail}
