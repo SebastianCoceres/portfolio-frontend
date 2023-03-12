@@ -15,6 +15,7 @@ import Title from "@/components/atoms/Title";
 import { useRouter } from "next/router";
 import FourOhFour from "pages/404";
 import Categories from "@/components/Categories";
+import { getImageUrl } from "@/hooks/getImageUrl";
 
 const Post: NextPage = ({
   post,
@@ -72,7 +73,12 @@ const Post: NextPage = ({
             </div>
 
             <div className="Markdown__Handler">
-              <ReactMarkdown rehypePlugins={[rehypeRaw]} components={CodeBlock} linkTarget="_blank">
+              <ReactMarkdown
+                rehypePlugins={[rehypeRaw]}
+                components={CodeBlock}
+                linkTarget="_blank"
+                transformImageUri={(uri) => getImageUrl(uri)}
+              >
                 {post.content}
               </ReactMarkdown>
             </div>
