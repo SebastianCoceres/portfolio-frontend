@@ -16,8 +16,8 @@ export default {
     description: "Sección de todos los proyectos en los que he participado"
   },
   about: {
-    title: "Sobre Mi",
-    menu: "Sobre Mi",
+    title: "Sobre Mí",
+    menu: "Sobre Mí",
     description:
       "En esta sección puede obtener más información sobre quién soy, mis objetivos y mis motivaciones .",
   },
