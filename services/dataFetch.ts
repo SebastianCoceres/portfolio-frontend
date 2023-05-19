@@ -17,7 +17,7 @@ var qs = require("qs");
 //Blog
 export async function getBlogPosts(locale = "es"): Promise<Blog[]> {
   let res = await fetch(
-    `https://api.sebastiancoceres.dev/blogs?populate=*${locale != "es" ? "&locale=en" : ""}`
+    `https://api.sebastiancoceres.dev/api/blogs?populate=*${locale != "es" ? "&locale=en" : ""}`
   );
   let blogs = await res.json();
 
@@ -93,7 +93,7 @@ export async function searchBlogPosts(
     }
   );
 
-  let searchString = `https://api.sebastiancoceres.dev/blogs?populate=*&${query}`
+  let searchString = `https://api.sebastiancoceres.dev/api/blogs?populate=*&${query}`
   console.log(searchString)
   let res = await fetch(searchString);
   let blogs = await res.json();
@@ -135,7 +135,7 @@ export async function getBlogDetail(
   locale: string
 ): Promise<BlogDetail> {
   let res = await fetch(
-    `https://api.sebastiancoceres.dev/blogs?populate=*${
+    `https://api.sebastiancoceres.dev/api/blogs?populate=*${
       locale != "es" ? "&locale=en" : ""
     }&filters[slug][$eq]=${slug}`
   );
@@ -167,7 +167,7 @@ export async function getBlogDetail(
 //Projects
 export async function getProjects(locale = "es"): Promise<Project[]> {
   let res = await fetch(
-    `https://api.sebastiancoceres.dev/proyects?populate=*${locale != "es" ? "&locale=en" : ""}`
+    `https://api.sebastiancoceres.dev/api/proyects?populate=*${locale != "es" ? "&locale=en" : ""}`
   );
   let projects = await res.json();
 
@@ -197,7 +197,7 @@ export async function getProjects(locale = "es"): Promise<Project[]> {
 
 export async function getProjectsPaths(locale = "es"): Promise<ProjectPath[]> {
   let res = await fetch(
-    `https://api.sebastiancoceres.dev/proyects?populate=*${locale != "es" ? "&locale=en" : ""}`
+    `https://api.sebastiancoceres.dev/api/proyects?populate=*${locale != "es" ? "&locale=en" : ""}`
   );
   let projects = await res.json();
   return projects.data.map((proyect: any): ProjectPath => {
@@ -216,7 +216,7 @@ export async function getProjectsDetail(
   locale: string
 ): Promise<ProjectDetail> {
   let res = await fetch(
-    `https://api.sebastiancoceres.dev/proyects?populate=*${
+    `https://api.sebastiancoceres.dev/api/proyects?populate=*${
       locale != "es" ? "&locale=en" : ""
     }&filters[slug][$eq]=${slug}`
   );
@@ -251,7 +251,7 @@ export async function getProjectsDetail(
 //Experience
 export async function getExperience(locale = "es"): Promise<Experience[]> {
   let res = await fetch(
-    `https://api.sebastiancoceres.dev/experiences?populate=*&filters[show][$ne]=false${
+    `https://api.sebastiancoceres.dev/api/experiences?populate=*&filters[show][$ne]=false${
       locale != "es" ? "&locale=en" : ""
     }`
   );
@@ -289,7 +289,7 @@ export async function getExperiencePaths(
   locale = "es"
 ): Promise<ExperiencePath[]> {
   let res = await fetch(
-    `https://api.sebastiancoceres.dev/experiences?populate=*${locale != "es" ? "&locale=en" : ""}`
+    `https://api.sebastiancoceres.dev/api/experiences?populate=*${locale != "es" ? "&locale=en" : ""}`
   );
   let experiences = await res.json();
   return experiences.data.map((experience: any): ExperiencePath => {
@@ -308,7 +308,7 @@ export async function getExperienceDetail(
   locale: string
 ): Promise<ExperienceDetail> {
   let res = await fetch(
-    `https://api.sebastiancoceres.dev/experiences?populate=*${
+    `https://api.sebastiancoceres.dev/api/experiences?populate=*${
       locale != "es" ? "&locale=en" : ""
     }&filters[slug][$eq]=${slug}`
   );
@@ -334,7 +334,7 @@ export async function getExperienceDetail(
 
 //About
 export async function getAbout(): Promise<About> {
-  let res = await fetch(`https://api.sebastiancoceres.dev/about?populate=*`);
+  let res = await fetch(`https://api.sebastiancoceres.dev/api/about?populate=*`);
   let about = await res.json();
 
   return {
@@ -346,7 +346,7 @@ export async function getAbout(): Promise<About> {
 }
 
 export async function getCategories(): Promise<Category> {
-  let res = await fetch(`https://api.sebastiancoceres.dev/categories?populate=*`);
+  let res = await fetch(`https://api.sebastiancoceres.dev/api/categories?populate=*`);
   let categories = await res.json();
   return categories.data.map((category: any): Category => {
     const projects = category.attributes.proyects?.data.filter(

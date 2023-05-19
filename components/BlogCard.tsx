@@ -21,7 +21,7 @@ function BlogCard({ data, index }: any) {
         type: "ease",
         opacity: { delay: 0 + index / 10, duration: 0.8 },
       }}
-      className="w-full md:w-1/3 lg:w-1/4 px-4 mb-4"
+      className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 mb-4"
     >
       <div className="p-2 border border-neutral-600 rounded-md h-full flex flex-col">
         <figure className="relative aspect-video mb-4">
