@@ -99,30 +99,29 @@ const Blogs: NextPage = ({
                 {blogsList.blogs.length == 0 ? (
                   <NoDataMsg />
                 ) : (
-                  blogsList.blogs.map((blog: any, i: number) => {
+                  blogsList.blogs.sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime()).map((blog: any, i: number) => {
                     return <BlogCard key={blog.id} data={blog} index={i} />;
                   })
                 )}
               </div>
               {blogsList.meta.pagination.total >
                 blogsList.meta.pagination.pageSize && (
-                <div className="pagination text-white flex justify-center mt-8">
-                  {[...Array(blogsList.meta.pagination.pageCount)].map(
-                    (el, i) => {
-                      return (
-                        <span
-                          className={`py-2 px-4 cursor-pointer hover:bg-indigo-600 rounded-md ${
-                            pag == i + 1 ? "bg-indigo-500" : ""
-                          }`}
-                          onClick={() => handlePageChange(i + 1)}
-                        >
-                          {i + 1}
-                        </span>
-                      );
-                    }
-                  )}
-                </div>
-              )}
+                  <div className="pagination text-white flex justify-center mt-8">
+                    {[...Array(blogsList.meta.pagination.pageCount)].map(
+                      (el, i) => {
+                        return (
+                          <span
+                            className={`py-2 px-4 cursor-pointer hover:bg-indigo-600 rounded-md ${pag == i + 1 ? "bg-indigo-500" : ""
+                              }`}
+                            onClick={() => handlePageChange(i + 1)}
+                          >
+                            {i + 1}
+                          </span>
+                        );
+                      }
+                    )}
+                  </div>
+                )}
             </>
           )
         )}

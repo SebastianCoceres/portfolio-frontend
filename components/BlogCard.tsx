@@ -29,7 +29,7 @@ function BlogCard({ data, index }: any) {
             src={!!data.externalImg ? data.externalImg : data.image}
             alt={""}
             fill
-            className="rounded-md"
+            className="rounded-md object-cover"
           ></Image>
           <figcaption className="absolute z-10 bottom-2 right-2 translate-y-[50%] px-4 py-2 bg-indigo-600 rounded-md text-xs">
             {data.date}

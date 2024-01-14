@@ -82,6 +82,9 @@ export async function searchBlogPosts(
           },
         ],
       },
+      sort: {
+        publishedAt: "desc",
+      },
       pagination: {
         page: pag,
         pageSize: 8,
@@ -94,7 +97,7 @@ export async function searchBlogPosts(
   );
 
   let searchString = `https://api.sebastiancoceres.dev/api/blogs?populate=*&${query}`
-  console.log(searchString)
+  //console.log(searchString)
   let res = await fetch(searchString);
   let blogs = await res.json();
 
