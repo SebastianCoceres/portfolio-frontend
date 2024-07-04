@@ -30,8 +30,8 @@ const Home: NextPage = () => {
         <meta name="og:title" content={title} />
         <meta name="og:description" content={description} />
       </Head>
-      <section className="min-h-screen flex flex-col p-4 lg:px-8 lg:py-16 xl:p-24 ">
-        <div className="flex-grow grid grid-cols-2 grid-rows-4 md:grid-cols-5 md:grid-rows-3 gap-2 h-[1px]">
+      <section className="h-100 min-h-screen flex flex-col p-4 lg:px-8 lg:py-16 xl:p-24 ">
+        <div className="flex-grow grid grid-cols-2 grid-rows-4 md:grid-cols-5 md:grid-rows-3 gap-2 h-100 min-h-[1px]">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

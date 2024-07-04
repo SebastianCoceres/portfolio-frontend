@@ -13,7 +13,7 @@ function Layout({ children }: any) {
     <main className="min-h-screen min-w-screen relative">
       <BreadCrums />
       {asPath != "/" && <DropdownMenu />}
-      {asPath == "/" && (
+      {/* {asPath == "/" && (
         <button className="text-white absolute top-6 right-6 z-10 border border-neutral-100/50 md:bg-indigo-600 xl:bg-transparent hover:bg-indigo-800 rounded-md cursor-pointer">
           {locale == "es" ? (
             <span className="block px-4 py-2" onClick={onChangeLanguage("en")}>
@@ -25,7 +25,7 @@ function Layout({ children }: any) {
             </span>
           )}
         </button>
-      )}
+      )} */}
 
       {children}
     </main>
